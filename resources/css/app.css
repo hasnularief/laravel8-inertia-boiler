@@ -1,0 +1,57 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "./sidebar";
+@import "./scrollbar";
+@import "./table";
+
+body {
+    background-color: #f1f1f1;
+}
+
+.bg-dark {
+    background-color: #343a40;
+}
+.bg-dark-2 {
+    background-color: #3a3f48;
+}
+.border-dark {
+    border-color: #343a40;
+}
+.color-dark {
+    color: #818896;
+}
+.btn {
+    @apply inline-block font-normal text-center align-middle;
+}
+.btn-dark {
+    @apply text-white bg-dark;
+}
+.btn-dark:hover {
+    @apply text-white bg-black;
+}
+.btn-action {
+    /* @apply text-xs py-2 px-1 relative no-underline; */
+    margin-left: 4px;
+    padding: 4px 8px;
+    position: relative;
+    top: -3px;
+    text-decoration: none;
+    border: 1px solid #0071a1;
+    border-radius: 2px;
+    text-shadow: none;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: normal;
+    color: #0071a1;
+    background: #f3f5f6;
+    cursor: pointer;
+    transition-property: border, background, color;
+    transition-duration: 0.05s;
+    transition-timing-function: ease-in-out;
+}
+.btn-action:hover {
+    border: 1px solid #00a0d2;
+    color: #00a0d2;
+}

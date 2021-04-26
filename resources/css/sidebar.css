@@ -1,0 +1,26 @@
+.sidebar-wrapper {
+    @apply left-0 bg-dark transition-all duration-300 w-56 h-full max-h-full fixed top-0 z-30 text-gray-400;
+}
+.sidebar-wrapper a:hover {
+    @apply text-gray-300;
+}
+.sidebar-content {
+    /* max-height: calc(100%-30px) !important;
+    height: calc(100%-30px) !important;
+    @apply relative overflow-y-auto; */
+    max-height: calc(100% - 30px);
+    height: calc(100% - 30px);
+    overflow-y: auto;
+    position: relative;
+}
+.sidebar-content .expand-icon {
+    transform: rotate(0deg);
+    transition-duration: 0.2s;
+}
+.sidebar-content .expand-icon.rotate {
+    transform: rotate(90deg);
+    transition-duration: 0.2s;
+}
+.sidebar-transition {
+    transition: all 0.3s ease;
+}

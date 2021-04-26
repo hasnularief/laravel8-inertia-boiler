@@ -1,0 +1,43 @@
+table.table {
+    @apply border-collapse w-full text-sm;
+}
+
+table.table thead tr th {
+    @apply p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden text-left;
+}
+
+table.table tbody tr {
+    @apply flex flex-row flex-wrap mb-10 bg-white;
+}
+
+table.table tbody tr td {
+    @apply w-full pt-8 pl-2 text-gray-800 text-left border-b border-r border-l block relative;
+}
+table.table tbody tr td .title {
+    @apply absolute top-0 left-0 px-2 py-1 text-gray-600 text-xs font-bold uppercase;
+    background-color: #e9ecef;
+}
+table.table tbody tr td:first-child {
+    @apply border-t;
+}
+
+@screen xl {
+    table.table thead tr th {
+        @apply table-cell p-1;
+    }
+    table.table tbody tr {
+        @apply table-row flex-row flex-nowrap mb-0;
+    }
+    table.table tbody tr:hover {
+        @apply bg-gray-100;
+    }
+    table.table tbody tr:first-child td {
+        @apply border-t;
+    }
+    table.table tbody tr td {
+        @apply w-auto table-cell static p-1;
+    }
+    table.table tbody tr td .title {
+        @apply hidden;
+    }
+}
