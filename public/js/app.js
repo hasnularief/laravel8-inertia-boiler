@@ -23578,7 +23578,7 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_2 = {
-  "class": "my-6 p-3 mx-3 bg-white"
+  "class": "my-6 p-3 mx-3 lg:mx-12 bg-white"
 };
 var _hoisted_3 = {
   "class": "my-2 flex sm:flex-row flex-col"
@@ -23755,6 +23755,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(obj.email), 1
         /* TEXT */
         )])])]), _hoisted_18, _hoisted_19, _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+          href: "#",
           "class": "text-indigo-600 hover:text-indigo-900",
           onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
             return $options.editData(obj.id);
@@ -23762,7 +23763,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, "Edit", 8
         /* PROPS */
         , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-          "class": "text-indigo-600 hover:text-indigo-900",
+          href: "#",
+          "class": "ml-3 text-indigo-600 hover:text-indigo-900",
           onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
             return _ctx.deleteData(obj.id);
           }, ["prevent"])

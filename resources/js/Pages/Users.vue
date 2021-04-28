@@ -6,7 +6,7 @@
             </h2>
         </template>
 
-        <div class="my-6 p-3 mx-3 bg-white">
+        <div class="my-6 p-3 mx-3 lg:mx-12 bg-white">
             <div class="my-2 flex sm:flex-row flex-col">
                 <div class="relative">
                     <button class="btn mr-2 mb-2 py-2" @click="newData()">
@@ -116,12 +116,14 @@
                                         class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                                     >
                                         <a
+                                            href="#"
                                             class="text-indigo-600 hover:text-indigo-900"
                                             @click.prevent="editData(obj.id)"
                                             >Edit</a
                                         >
                                         <a
-                                            class="text-indigo-600 hover:text-indigo-900"
+                                            href="#"
+                                            class="ml-3 text-indigo-600 hover:text-indigo-900"
                                             @click.prevent="deleteData(obj.id)"
                                             >Delete</a
                                         >
