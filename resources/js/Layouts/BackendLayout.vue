@@ -1,9 +1,10 @@
 <template>
+    <jet-banner />
     <div class="min-h-screen">
         <div
             class="sidebar-backdrop"
             @click="closeSidebarPanel"
-            v-if="isPanelOpen"
+            v-show="isPanelOpen"
         ></div>
         <nav class="h-10 py-0 px-8 bg-dark relative flex">
             <a
@@ -15,7 +16,7 @@
                 <i class="fas fa-bars text-white"></i>
             </a>
             <transition name="slide">
-                <nav v-if="isPanelOpen" id="sidebar" class="sidebar-wrapper">
+                <nav v-show="isPanelOpen" id="sidebar" class="sidebar-wrapper">
                     <div class="sidebar-content">
                         <div class="py-3 px-5 text-base flex">
                             <a href="#" class="font-bold text-base flex-1"
@@ -72,9 +73,11 @@
 <script>
 import { store, mutations } from "../store";
 import BackendLayoutMenu from "./BackendLayoutMenu.vue";
+import JetBanner from "@/Jetstream/Banner";
 export default {
     components: {
         BackendLayoutMenu,
+        JetBanner,
     },
     data() {
         return {
@@ -152,14 +155,28 @@ export default {
 </script>
 
 <style>
-.slide-enter-active,
+/* .slide-enter-active,
 .slide-leave-active {
     transition: transform 0.2s ease;
 }
-.slide-enter,
+.slide-enter {
+    transform: translateX(-100%);
+    transition: all 150ms ease-in 0s;
+}
 .slide-leave-to {
     transform: translateX(-100%);
     transition: all 150ms ease-in 0s;
+} */
+.slide-leave-active,
+.slide-enter-active {
+    transition: 1s !important;
+    transform: translateX(0) !important;
+}
+.slide-enter {
+    transform: translateX(100%) !important;
+}
+.slide-leave-to {
+    transform: translate(-100%) !important;
 }
 
 .sidebar-backdrop {
@@ -170,5 +187,15 @@ export default {
     top: 0;
     left: 0;
     cursor: pointer;
+}
+
+.show-enter,
+.show-leave-to {
+    opacity: 0 !important;
+    transform: translateX(-60px) !important;
+}
+.show-enter-active,
+.show-leave-active {
+    transition: all 500ms !important;
 }
 </style>

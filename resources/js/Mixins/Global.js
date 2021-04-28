@@ -1,3 +1,4 @@
+import axios from "axios";
 export default {
     computed: {
         _host() {
@@ -5,8 +6,10 @@ export default {
         },
     },
     methods: {
+        axios,
+
         url(val) {
-            return this._host + "/" + val;
+            return this._host + val;
         },
     },
 };

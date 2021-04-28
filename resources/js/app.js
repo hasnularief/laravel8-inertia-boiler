@@ -16,11 +16,13 @@ const app = createApp({
         h(InertiaApp, {
             initialPage: JSON.parse(el.dataset.page),
             resolveComponent: (name) => require(`./Pages/${name}`).default,
+            resolveErrors: (page) => page.props.errors || {},
         }),
 })
     .mixin({ methods: { route } })
     .mixin(GlobalMixin)
-    .use(InertiaPlugin)
-    .mount(el);
+    .use(InertiaPlugin);
+
+app.mount(el);
 
 InertiaProgress.init({ color: "#4B5563" });

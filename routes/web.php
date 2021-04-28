@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,9 @@ Route::prefix('/b')->namespace('App\Http\Controllers')->group(function(){
     Route::get('/users', 'UsersController@read')->name('users');
     Route::post('/users', 'UsersController@write')->name('users.write');
 });
+
+Route::get('/article', [ArticleController::class, 'index']);
+Route::post('/article', [ArticleController::class, 'store']);
+Route::patch('/article/edit/{id}', [ArticleController::class, 'update']);
+Route::delete('/article/delete/{id}', [ArticleController::class, 'delete']);
 
