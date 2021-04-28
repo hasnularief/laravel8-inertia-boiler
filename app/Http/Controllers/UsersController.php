@@ -15,8 +15,10 @@ class UsersController extends AuthController
             return response()->json($obj);
         }
 
+        $data = User::select('id','name','email')->paginate($this->per_page());
+
         return Inertia::render('Users', [
-            'data' => User::select('id','name','email')->paginate($this->per_page()),
+            'data' => $data
         ]);
     }
 

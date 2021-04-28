@@ -2,60 +2,153 @@
     <layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
+                Users Management
             </h2>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div
-                    class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3"
-                >
-                    <a href="#" class="btn" @click="newData()">Add New</a>
-                    <button class="btn ml-3" @click="submit()">
-                        Test banner
+        <div class="my-6 p-3 mx-3 bg-white">
+            <div class="my-2 flex sm:flex-row flex-col">
+                <div class="relative">
+                    <button class="btn mr-2 mb-2 py-2" @click="newData()">
+                        New Data
                     </button>
-
-                    <table class="table mt-3">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th style="width: 120px">Act</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="obj in data.data" :key="obj.id">
-                                <td>
-                                    <span class="title">Name</span>
-                                    {{ obj.name }}
-                                </td>
-                                <td>
-                                    <span class="title">Email</span>
-                                    {{ obj.email }}
-                                </td>
-                                <td>
-                                    <span class="title">Role</span>
-                                    {{ obj.role }}
-                                </td>
-                                <td>
-                                    <span class="title">Act</span>
-                                    <a
-                                        href="#"
-                                        class="text-blue-400 hover:text-blue-600 underline"
-                                        @click="editData(obj.id)"
-                                        >Edit</a
+                </div>
+                <div class="block relative mb-4">
+                    <i
+                        class="absolute top-2 left-2 fa fa-search text-gray-400 z-20 hover:text-gray-500"
+                    ></i>
+                    <input
+                        placeholder="Search"
+                        class="input pl-8 pr-6 py-1 w-full"
+                    />
+                    <button class="py-1 m-1 btn absolute top-0 right-0">
+                        Search
+                    </button>
+                </div>
+            </div>
+            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div
+                    class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+                >
+                    <div
+                        class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+                    >
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                     >
-                                    <a
-                                        href="#"
-                                        class="text-blue-400 hover:text-blue-600 underline ml-2"
-                                        >Delete</a
+                                        Name
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                     >
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                        Title
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >
+                                        Status
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >
+                                        Role
+                                    </th>
+                                    <th scope="col" class="relative px-6 py-3">
+                                        <span class="sr-only">Edit</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr v-for="obj in data.data" :key="obj.id">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div
+                                                class="flex-shrink-0 h-10 w-10"
+                                            >
+                                                <img
+                                                    class="h-10 w-10 rounded-full"
+                                                    :src="obj.profile_photo_url"
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div class="ml-4">
+                                                <div
+                                                    class="text-sm font-medium text-gray-900"
+                                                >
+                                                    {{ obj.name }}
+                                                </div>
+                                                <div
+                                                    class="text-sm text-gray-500"
+                                                >
+                                                    {{ obj.email }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">
+                                            Regional Paradigm Technician
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            Optimization
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                                        >
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                                    >
+                                        Admin
+                                    </td>
+                                    <td
+                                        class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                                    >
+                                        <a
+                                            class="text-indigo-600 hover:text-indigo-900"
+                                            @click.prevent="editData(obj.id)"
+                                            >Edit</a
+                                        >
+                                        <a
+                                            class="text-indigo-600 hover:text-indigo-900"
+                                            @click.prevent="deleteData(obj.id)"
+                                            >Delete</a
+                                        >
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between"
+            >
+                <span class="text-xs xs:text-sm text-gray-900">
+                    Showing 1 to 4 of 50 Entries
+                </span>
+                <div class="inline-flex mt-2 xs:mt-0">
+                    <button
+                        class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l"
+                    >
+                        Prev
+                    </button>
+                    <button
+                        class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r"
+                    >
+                        Next
+                    </button>
                 </div>
             </div>
         </div>
