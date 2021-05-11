@@ -1,128 +1,44 @@
 <template>
-    <div>
-        <div
-            :class="{
-                'bg-indigo-500': style == 'success',
-                'bg-red-700': style == 'danger',
-            }"
-            v-if="show && message"
-        >
-            <div class="max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between flex-wrap">
-                    <div class="w-0 flex-1 flex items-center min-w-0">
-                        <span
-                            class="flex p-2 rounded-lg"
-                            :class="{
-                                'bg-indigo-600': style == 'success',
-                                'bg-red-600': style == 'danger',
-                            }"
-                        >
-                            <svg
-                                class="h-5 w-5 text-white"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                v-if="style == 'success'"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                            </svg>
-
-                            <svg
-                                class="h-5 w-5 text-white"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                v-if="style == 'danger'"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                                />
-                            </svg>
-                        </span>
-
-                        <p class="ml-3 font-medium text-sm text-white truncate">
-                            {{ message }}
-                        </p>
-                    </div>
-
-                    <div class="flex-shrink-0 sm:ml-3">
-                        <button
-                            type="button"
-                            class="-mr-1 flex p-2 rounded-md focus:outline-none sm:-mr-2 transition"
-                            :class="{
-                                'hover:bg-indigo-600 focus:bg-indigo-600':
-                                    style == 'success',
-                                'hover:bg-red-600 focus:bg-red-600':
-                                    style == 'danger',
-                            }"
-                            aria-label="Dismiss"
-                            @click.prevent="closeBanner()"
-                        >
-                            <svg
-                                class="h-5 w-5 text-white"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div v-for="(obj, token) in stacked" :key="token">
+        <banner-child
+            :message="obj.message"
+            :style="obj.style"
+            @close="close(token)"
+        />
     </div>
 </template>
 
 <script>
+import BannerChild from "./BannerChild.vue";
+
 export default {
+    components: { BannerChild },
     data() {
         return {
             show: true,
-            autoClose: false,
-            message: "",
-            style: "success",
+            stacked: {},
         };
     },
 
     watch: {
-        message() {
-            setTimeout(() => {
-                this.message = "";
-            }, 3000);
-        },
         response_token(val) {
-            this.message = this.$page.props.jetstream.flash?.banner || "";
-            this.style =
-                this.$page.props.jetstream.flash?.bannerStyle || "success";
-            //console.log("TOKEN:" + val);
+            if (this.message) {
+                this.stacked[val] = {
+                    message: this.message,
+                    style: this.style,
+                };
+            }
         },
     },
 
     computed: {
-        // style() {
-        //     return ;
-        // },
+        style() {
+            return this.$page.props.jetstream.flash?.bannerStyle || "success";
+        },
 
-        //message() {
-        //    return this.$page.props.jetstream.flash?.banner || "";
-        //},
+        message() {
+            return this.$page.props.jetstream.flash?.banner || "";
+        },
 
         response_token() {
             return this.$page.props.response_token;
@@ -130,9 +46,9 @@ export default {
     },
 
     methods: {
-        closeBanner() {
-            this.message = "";
-            this.show = False;
+        close(token) {
+            delete this.stacked[token];
+            console.log("CLOSE TOKEN: " + token);
         },
     },
 };

@@ -49,7 +49,7 @@ class UsersController extends AuthController
 
             // $user->save();
             
-            return back()->withFlash(['banner' => "Sukes"]);
+            return back()->withFlash(['banner' => "Sukes " . $request->id]);
         }
 
     }
