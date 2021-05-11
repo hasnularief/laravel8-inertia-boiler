@@ -18,10 +18,15 @@
                         class="absolute top-2 left-2 fa fa-search text-gray-400 z-20 hover:text-gray-500"
                     ></i>
                     <input
+                        v-model="search"
                         placeholder="Search"
                         class="input pl-8 pr-6 py-1 w-full"
+                        @keypress.enter="readData()"
                     />
-                    <button class="py-1 m-1 btn absolute top-0 right-0">
+                    <button
+                        class="py-1 m-1 btn absolute top-0 right-0"
+                        @click="readData()"
+                    >
                         Search
                     </button>
                 </div>
@@ -134,25 +139,8 @@
                     </div>
                 </div>
             </div>
-            <div
-                class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between"
-            >
-                <span class="text-xs xs:text-sm text-gray-900">
-                    Showing 1 to 4 of 50 Entries
-                </span>
-                <div class="inline-flex mt-2 xs:mt-0">
-                    <button
-                        class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l"
-                    >
-                        Prev
-                    </button>
-                    <button
-                        class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r"
-                    >
-                        Next
-                    </button>
-                </div>
-            </div>
+
+            <pagination :links="this.$props.data" :filters="{ search }" />
         </div>
     </layout>
     <jet-dialog-modal :show="showModal" @close="closeModal">
@@ -202,20 +190,25 @@ import Layout from "@/Layouts/AppLayout";
 import JetDialogModal from "@/Jetstream/DialogModal";
 import axios from "axios";
 
+import Pagination from "../Components/Pagination.vue";
+
 export default {
     props: {
         data: Object,
         errors: Object,
+        filters: Object,
     },
 
     components: {
         Layout,
         JetDialogModal,
+        Pagination,
     },
 
     data() {
         return {
             showModal: false,
+            search: "",
             form: this.$inertia.form({
                 id: null,
                 name: null,
@@ -225,9 +218,16 @@ export default {
         };
     },
 
-    created() {},
+    created() {
+        this.search = this.filters?.search;
+    },
 
     methods: {
+        readData() {
+            this.$inertia.get(url("/b/users"), {
+                search: this.search,
+            });
+        },
         submit() {
             this.form.post(url("/b/users?req=write"));
         },
@@ -251,6 +251,7 @@ export default {
         },
         async writeData() {
             this.form.post(url("/b/users?req=write"));
+            this.closeModal();
         },
     },
 };

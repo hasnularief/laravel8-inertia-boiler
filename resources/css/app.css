@@ -6,8 +6,9 @@
 @import "./sidebar";
 */
 @import "./components";
-/*
+
 @import "./scrollbar";
+/*
 @import "./table";
 
 body {

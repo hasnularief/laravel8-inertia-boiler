@@ -42,6 +42,9 @@
 .input:focus {
     @apply ring ring-indigo-200 ring-opacity-50;
 }
+.input:focus-visible {
+    outline: none;
+}
 .input-error {
     @apply text-sm text-red-600;
 }

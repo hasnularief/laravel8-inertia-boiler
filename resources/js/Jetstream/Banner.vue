@@ -66,7 +66,7 @@
                                     style == 'danger',
                             }"
                             aria-label="Dismiss"
-                            @click.prevent="show = false"
+                            @click.prevent="closeBanner()"
                         >
                             <svg
                                 class="h-5 w-5 text-white"
@@ -95,16 +95,44 @@ export default {
     data() {
         return {
             show: true,
+            autoClose: false,
+            message: "",
+            style: "success",
         };
     },
 
-    computed: {
-        style() {
-            return this.$page.props.jetstream.flash?.bannerStyle || "success";
-        },
-
+    watch: {
         message() {
-            return this.$page.props.jetstream.flash?.banner || "";
+            setTimeout(() => {
+                this.message = "";
+            }, 3000);
+        },
+        response_token(val) {
+            this.message = this.$page.props.jetstream.flash?.banner || "";
+            this.style =
+                this.$page.props.jetstream.flash?.bannerStyle || "success";
+            //console.log("TOKEN:" + val);
+        },
+    },
+
+    computed: {
+        // style() {
+        //     return ;
+        // },
+
+        //message() {
+        //    return this.$page.props.jetstream.flash?.banner || "";
+        //},
+
+        response_token() {
+            return this.$page.props.response_token;
+        },
+    },
+
+    methods: {
+        closeBanner() {
+            this.message = "";
+            this.show = False;
         },
     },
 };

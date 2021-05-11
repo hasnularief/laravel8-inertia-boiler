@@ -15,7 +15,10 @@ class UsersController extends AuthController
             return response()->json($obj);
         }
 
-        $data = User::select('id','name','email')->paginate($this->per_page());
+        $data = User::where('name', 'like', "%{$request->search}%")->select('id','name','email')->paginate($this->per_page());
+
+//        return response()->json($data);
+
 
         return Inertia::render('Users', [
             'data' => $data
